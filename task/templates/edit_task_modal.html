@@ -59,22 +59,14 @@
             </select>
           </div>
         </div>
-        <div class="modal-footer d-flex justify-content-between">
 
-        <button type="submit" class="btn btn-success">Salvar</button>
-
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-            Cancelar
-        </button>
-
-        {% if task.created_by.id == current_user.id %}
-        <form method="post" action="{% url 'delete_task' task.id %}" style="display:inline;">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja deletar esta task?');">
-            Deletar
+        <div class="modal-footer d-flex justify-content-between align-items-center">
+          <div>
+            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Cancelar
             </button>
-        </form>
-        {% endif %}
+          </div>
         </div>
       </form>
     </div>

@@ -4,6 +4,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from .models import User
 
 def register(request):
+    user_id = request.session.get("user_id")
+    if user_id:
+        return redirect("home")
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
@@ -22,6 +25,9 @@ def register(request):
     return render(request, "register.html")
 
 def login(request):
+    user_id = request.session.get("user_id")
+    if user_id:
+        return redirect("home")
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")

@@ -54,87 +54,122 @@
         </div>
 
       <div class="board">
-        <!-- Coluna Pendente -->
         <div class="column">
           <h5>Pendente</h5>
           {% for task in tasks %}
-          {% if task.status == 'PENDENTE' %}
-          <div class="card-task">
-            <strong>{{ task.name }}</strong>
-            <p>{{ task.description }}</p>
-            <small>Responsável: {{ task.owner.email }}</small><br>
-            {% if task.owner == current_user %}
-            <button
-                class="btn btn-sm btn-warning mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#editTaskModal{{ task.id }}"
-            >
-                Editar
-            </button>
-            {% endif %}
-          </div>
+            {% if task.status == 'PENDENTE' %}
+            <div class="card-task">
+              <strong>{{ task.name }}</strong>
+              <p>{{ task.description }}</p>
+              <small>Responsável: {{ task.owner.email }}</small><br>
 
-          <!-- Modal de edição -->
-          {% include "edit_task_modal.html" %}
-          {% endif %}
+              {% if task.owner == current_user %}
+              <div class="mt-2 d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-warning"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTaskModal{{ task.id }}"
+                >
+                  Editar
+                </button>
+
+                <form method="post" action="{% url 'delete_task' task.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    class="btn btn-sm btn-danger"
+                    onclick="return confirm('Tem certeza que deseja deletar esta task?');"
+                  >
+                    Deletar
+                  </button>
+                </form>
+              </div>
+              {% endif %}
+            </div>
+
+            {% include "edit_task_modal.html" %}
+            {% endif %}
           {% endfor %}
         </div>
 
-        <!-- Coluna Em andamento -->
         <div class="column">
           <h5>Em andamento</h5>
           {% for task in tasks %}
-          {% if task.status == 'EM_ANDAMENTO' %}
-          <div class="card-task">
-            <strong>{{ task.name }}</strong>
-            <p>{{ task.description }}</p>
-            <small>Responsável: {{ task.owner.email }}</small><br>
-            {% if task.owner == current_user %}
-            <button
-                class="btn btn-sm btn-warning mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#editTaskModal{{ task.id }}"
-            >
-                Editar
-            </button>
-            {% endif %}
-          </div>
+            {% if task.status == 'EM_ANDAMENTO' %}
+            <div class="card-task">
+              <strong>{{ task.name }}</strong>
+              <p>{{ task.description }}</p>
+              <small>Responsável: {{ task.owner.email }}</small><br>
 
-          <!-- Modal de edição -->
-          {% include "edit_task_modal.html" %}
-          {% endif %}
+              {% if task.owner == current_user %}
+              <div class="mt-2 d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-warning"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTaskModal{{ task.id }}"
+                >
+                  Editar
+                </button>
+
+                <form method="post" action="{% url 'delete_task' task.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    class="btn btn-sm btn-danger"
+                    onclick="return confirm('Tem certeza que deseja deletar esta task?');"
+                  >
+                    Deletar
+                  </button>
+                </form>
+              </div>
+              {% endif %}
+            </div>
+
+            {% include "edit_task_modal.html" %}
+            {% endif %}
           {% endfor %}
         </div>
 
-        <!-- Coluna Concluída -->
         <div class="column">
           <h5>Concluída</h5>
           {% for task in tasks %}
-          {% if task.status == 'CONCLUIDA' %}
-          <div class="card-task">
-            <strong>{{ task.name }}</strong>
-            <p>{{ task.description }}</p>
-            <small>Responsável: {{ task.owner.email }}</small><br>
-            {% if task.owner == current_user %}
-            <button
-                class="btn btn-sm btn-warning mt-2"
-                data-bs-toggle="modal"
-                data-bs-target="#editTaskModal{{ task.id }}"
-            >
-                Editar
-            </button>
-            {% endif %}
-          </div>
+            {% if task.status == 'CONCLUIDA' %}
+            <div class="card-task">
+              <strong>{{ task.name }}</strong>
+              <p>{{ task.description }}</p>
+              <small>Responsável: {{ task.owner.email }}</small><br>
 
-          <!-- Modal de edição -->
-          {% include "edit_task_modal.html" %}
-          {% endif %}
+              {% if task.owner == current_user %}
+              <div class="mt-2 d-flex gap-2">
+                <button
+                  class="btn btn-sm btn-warning"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editTaskModal{{ task.id }}"
+                >
+                  Editar
+                </button>
+
+                <form method="post" action="{% url 'delete_task' task.id %}" style="display:inline;">
+                  {% csrf_token %}
+                  <button
+                    type="submit"
+                    class="btn btn-sm btn-danger"
+                    onclick="return confirm('Tem certeza que deseja deletar esta task?');"
+                  >
+                    Deletar
+                  </button>
+                </form>
+              </div>
+              {% endif %}
+            </div>
+
+            {% include "edit_task_modal.html" %}
+            {% endif %}
           {% endfor %}
         </div>
       </div>
     </div>
 
-    <!-- Modal de criação de task -->
     <div
       class="modal fade"
       id="createTaskModal"
