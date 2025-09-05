@@ -17,6 +17,7 @@ class Task(models.Model):
         choices=Status.choices,
         default=Status.PENDENTE
     )
+    description = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey(
@@ -33,3 +34,6 @@ class Task(models.Model):
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return self.name
